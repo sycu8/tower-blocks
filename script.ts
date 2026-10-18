@@ -167,8 +167,8 @@ class Block
 		// create block
 		
 		let geometry = new THREE.BoxGeometry( this.dimension.width, this.dimension.height, this.dimension.depth);
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation(this.dimension.width/2, this.dimension.height/2, this.dimension.depth/2) );
-		this.material = new THREE.MeshToonMaterial( {color: this.color, shading: THREE.FlatShading} );
+		geometry.applyMatrix4( new THREE.Matrix4().makeTranslation(this.dimension.width/2, this.dimension.height/2, this.dimension.depth/2) );
+		this.material = new THREE.MeshToonMaterial( {color: this.color, flatShading: true} );
 		this.mesh = new THREE.Mesh( geometry, this.material );
 		this.mesh.position.set(this.position.x, this.position.y + (this.state == this.STATES.ACTIVE ? 0 : 0), this.position.z);
 		
@@ -211,11 +211,11 @@ class Block
 			this.dimension[this.workingDimension] = overlap;
 					
 			let placedGeometry = new THREE.BoxGeometry( this.dimension.width, this.dimension.height, this.dimension.depth);
-			placedGeometry.applyMatrix( new THREE.Matrix4().makeTranslation(this.dimension.width/2, this.dimension.height/2, this.dimension.depth/2) );
+			placedGeometry.applyMatrix4( new THREE.Matrix4().makeTranslation(this.dimension.width/2, this.dimension.height/2, this.dimension.depth/2) );
 			let placedMesh = new THREE.Mesh( placedGeometry, this.material );
 			
 			let choppedGeometry = new THREE.BoxGeometry( choppedDimensions.width, choppedDimensions.height, choppedDimensions.depth);
-			choppedGeometry.applyMatrix( new THREE.Matrix4().makeTranslation(choppedDimensions.width/2, choppedDimensions.height/2, choppedDimensions.depth/2) );
+			choppedGeometry.applyMatrix4( new THREE.Matrix4().makeTranslation(choppedDimensions.width/2, choppedDimensions.height/2, choppedDimensions.depth/2) );
 			let choppedMesh = new THREE.Mesh( choppedGeometry, this.material );
 			
 			let choppedPosition = {
