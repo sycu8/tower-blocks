@@ -1,14 +1,17 @@
 import { defineConfig } from 'vite';
 import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 function codePenTsPlugin() {
   return {
     name: 'codepen-ts-transform',
     enforce: 'pre',
-    resolveId(source, importer) {
+    resolveId(source) {
       if (source.endsWith('script.ts') || source === './script.ts') {
-        return resolve('/workspace/script.ts') + '?codepen';
+        return resolve(projectRoot, 'script.ts') + '?codepen';
       }
     },
     load(id) {
